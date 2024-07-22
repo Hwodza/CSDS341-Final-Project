@@ -1,41 +1,41 @@
 CREATE TABLE User (
-    user_id VARCHAR(255) PRIMARY KEY,
-    first_name VARCHAR(255),
-    middle_name VARCHAR(255),
-    last_name VARCHAR(255),
-    case_email VARCHAR(255) UNIQUE
+    user_id VARCHAR(30) PRIMARY KEY,
+    first_name VARCHAR(30),
+    middle_name VARCHAR(30),
+    last_name VARCHAR(30),
+    case_email VARCHAR(30) UNIQUE
 );
 
 CREATE TABLE Has_role (
-    user_id VARCHAR(255),
-    role_id VARCHAR(255),
+    user_id VARCHAR(50),
+    role_id VARCHAR(50),
     PRIMARY KEY (user_id, role_id),
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
 CREATE TABLE Team (
-    team_id VARCHAR(255) PRIMARY KEY,
-    team_name VARCHAR(255),
+    team_id VARCHAR(30) PRIMARY KEY,
+    team_name VARCHAR(100),
     description TEXT
 );
 
 CREATE TABLE Comprised (
-    user_id VARCHAR(255),
-    team_id VARCHAR(255),
+    user_id VARCHAR(50),
+    team_id VARCHAR(50),
     PRIMARY KEY (user_id, team_id),
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (team_id) REFERENCES Team(team_id)
 );
 
 CREATE TABLE Event (
-    event_id VARCHAR(255) PRIMARY KEY,
-    event_name VARCHAR(255),
+    event_id VARCHAR(100) PRIMARY KEY,
+    event_name VARCHAR(150),
     event_date DATETIME,
     event_description TEXT
 );
 
 CREATE TABLE Plans (
-    team_id VARCHAR(255),
+    team_id VARCHAR(200),
     event_id VARCHAR(255),
     PRIMARY KEY (team_id, event_id),
     FOREIGN KEY (team_id) REFERENCES Team(team_id),
