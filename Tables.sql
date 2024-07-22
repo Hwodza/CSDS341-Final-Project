@@ -1,117 +1,105 @@
 CREATE TABLE User (
-    UserID VARCHAR(255) PRIMARY KEY,
+    user_id VARCHAR(255) PRIMARY KEY,
     first_name VARCHAR(255),
     middle_name VARCHAR(255),
     last_name VARCHAR(255),
     case_email VARCHAR(255) UNIQUE
 );
 
-
 CREATE TABLE Has_role (
-    UserID VARCHAR(255),
-    RoleID VARCHAR(255),
-    PRIMARY KEY (UserID, RoleID),
-    FOREIGN KEY (UserID) REFERENCES User(UserID)
+    user_id VARCHAR(255),
+    role_id VARCHAR(255),
+    PRIMARY KEY (user_id, role_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
 CREATE TABLE Team (
-    TeamID VARCHAR(255) PRIMARY KEY,
-    Team_name VARCHAR(255),
-    Description TEXT
+    team_id VARCHAR(255) PRIMARY KEY,
+    team_name VARCHAR(255),
+    description TEXT
 );
-
 
 CREATE TABLE Comprised (
-    UserID VARCHAR(255),
-    TeamID VARCHAR(255),
-    PRIMARY KEY (UserID, TeamID),
-    FOREIGN KEY (UserID) REFERENCES User(UserID),
-    FOREIGN KEY (TeamID) REFERENCES Team(TeamID)
+    user_id VARCHAR(255),
+    team_id VARCHAR(255),
+    PRIMARY KEY (user_id, team_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (team_id) REFERENCES Team(team_id)
 );
-
 
 CREATE TABLE Event (
-    EventID VARCHAR(255) PRIMARY KEY,
-    Event_name VARCHAR(255),
-    Event_date DATETIME,
-    Event_description TEXT
+    event_id VARCHAR(255) PRIMARY KEY,
+    event_name VARCHAR(255),
+    event_date DATETIME,
+    event_description TEXT
 );
-
 
 CREATE TABLE Plans (
-    TeamID VARCHAR(255),
-    EventID VARCHAR(255),
-    PRIMARY KEY (TeamID, EventID),
-    FOREIGN KEY (TeamID) REFERENCES Team(TeamID),
-    FOREIGN KEY (EventID) REFERENCES Event(EventID)
+    team_id VARCHAR(255),
+    event_id VARCHAR(255),
+    PRIMARY KEY (team_id, event_id),
+    FOREIGN KEY (team_id) REFERENCES Team(team_id),
+    FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
-
 
 CREATE TABLE Venue (
-    VenueID VARCHAR(255) PRIMARY KEY,
-    Building VARCHAR(255),
+    venue_id VARCHAR(255) PRIMARY KEY,
+    building VARCHAR(255),
     room VARCHAR(255),
-    Max_people INT
+    max_people INT
 );
-
 
 CREATE TABLE Hosted_at (
-    VenueID VARCHAR(255),
-    EventID VARCHAR(255),
-    PRIMARY KEY (VenueID, EventID),
-    FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
-    FOREIGN KEY (EventID) REFERENCES Event(EventID)
+    venue_id VARCHAR(255),
+    event_id VARCHAR(255),
+    PRIMARY KEY (venue_id, event_id),
+    FOREIGN KEY (venue_id) REFERENCES Venue(venue_id),
+    FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
-
 
 CREATE TABLE Equipment (
-    EquipmentID VARCHAR(255) PRIMARY KEY,
-    Equipment_type VARCHAR(255),
-    Status VARCHAR(255)
+    equipment_id VARCHAR(255) PRIMARY KEY,
+    equipment_type VARCHAR(255),
+    status VARCHAR(255)
 );
-
 
 CREATE TABLE Uses (
-    EventID VARCHAR(255),
-    EquipmentID VARCHAR(255),
-    Start_Date DATETIME,
-    End_Date DATETIME,
-    Quantity INT,
-    PRIMARY KEY (EventID, EquipmentID),
-    FOREIGN KEY (EventID) REFERENCES Event(EventID),
-    FOREIGN KEY (EquipmentID) REFERENCES Equipment(EquipmentID)
+    event_id VARCHAR(255),
+    equipment_id VARCHAR(255),
+    start_date DATETIME,
+    end_date DATETIME,
+    quantity INT,
+    PRIMARY KEY (event_id, equipment_id),
+    FOREIGN KEY (event_id) REFERENCES Event(event_id),
+    FOREIGN KEY (equipment_id) REFERENCES Equipment(equipment_id)
 );
 
-
 CREATE TABLE Budget (
-    BudgetID VARCHAR(255) PRIMARY KEY,
-    Total_budget INT,
+    budget_id VARCHAR(255) PRIMARY KEY,
+    total_budget INT,
     remaining_budget INT,
     budget_description TEXT
 );
 
-
 CREATE TABLE Allocated (
-    BudgetID VARCHAR(255),
-    EventID VARCHAR(255),
-    PRIMARY KEY (BudgetID, EventID),
-    FOREIGN KEY (BudgetID) REFERENCES Budget(BudgetID),
-    FOREIGN KEY (EventID) REFERENCES Event(EventID)
+    budget_id VARCHAR(255),
+    event_id VARCHAR(255),
+    PRIMARY KEY (budget_id, event_id),
+    FOREIGN KEY (budget_id) REFERENCES Budget(budget_id),
+    FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
-
 
 CREATE TABLE Expenses (
-    PurchaseID VARCHAR(255) PRIMARY KEY,
-    PurchaseDate DATETIME,
-    Purchase_Amount INT,
-    Purchase_Description TEXT
+    purchase_id VARCHAR(255) PRIMARY KEY,
+    purchase_date DATETIME,
+    purchase_amount INT,
+    purchase_description TEXT
 );
 
-
 CREATE TABLE Has (
-    PurchaseID VARCHAR(255),
-    EventID VARCHAR(255),
-    PRIMARY KEY (PurchaseID, EventID),
-    FOREIGN KEY (PurchaseID) REFERENCES Expenses(PurchaseID),
-    FOREIGN KEY (EventID) REFERENCES Event(EventID)
+    purchase_id VARCHAR(255),
+    event_id VARCHAR(255),
+    PRIMARY KEY (purchase_id, event_id),
+    FOREIGN KEY (purchase_id) REFERENCES Expenses(purchase_id),
+    FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
