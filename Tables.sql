@@ -1,7 +1,6 @@
 CREATE TABLE User (
     user_id VARCHAR(30) PRIMARY KEY,
     first_name VARCHAR(30),
-    middle_name VARCHAR(30),
     last_name VARCHAR(30),
     case_email VARCHAR(30) UNIQUE
 );
